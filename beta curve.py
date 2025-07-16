@@ -1,5 +1,3 @@
-#Funciona!!!
-
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy.lib.scimath import arcsin
@@ -17,7 +15,7 @@ def tkm(beta, n):
     tskm = -(np.sin(thetaim1 - thetatm1)/(np.sin(thetaim1 + thetatm1) + 1e-15)) * \
         (np.sin(thetaim2 - thetatm2)/(np.sin(thetaim2 + thetatm2) + 1e-15)) * \
         (np.sin(thetaim3 - thetatm3)/(np.sin(thetaim3 + thetatm3) + 1e-15))
-    #tpkm = (np.tan(thetaim1 - thetatm1)/np.tan(thetaim1 + thetatm1)) * (np.tan(thetaim2 - thetatm2)/np.tan(thetaim2 + thetatm2)) * (np.tan(thetaim3 - thetatm3)/np.tan(thetaim3 + thetatm3))
+
     tpkm = (np.tan(thetaim1 - thetatm1) / (np.tan(thetaim1 + thetatm1) + 1e-15)) * \
        (np.tan(thetaim2 - thetatm2) / (np.tan(thetaim2 + thetatm2) + 1e-15)) * \
        (np.tan(thetaim3 - thetatm3) / (np.tan(thetaim3 + thetatm3) + 1e-15))
@@ -50,16 +48,7 @@ def difference(tskm, tpkm, delta, phi, psi):
         return d, s1, s2, s3
 
 
-'''def average_distance(beta, n, delta, psi):
-    dsum = 0
-    tskm, tpkm = tkm(beta, n)
-    for i in range(0, 180):
-        phi = np.deg2rad(i)
-        d = difference(tskm, tpkm, delta, phi, psi)
-        dsum += d
-    davg = dsum / 180
-    return davg''' 
-#removido, não representa a integral corretamente, sem pesos
+
 def avarage_distance_weighted(beta, n, delta, psi):
     phis = np.linspace(0, np.pi, 360)
     s1_list = []
@@ -117,10 +106,10 @@ def beta_curve(n, delta, psi):
     
 
 def main():
-    n = 0.033678 + 5.4208j #prata no nosso, 780 nm
-    #n = 0.13883 + 4.4909j #ouro no nosso, 750 nm
-    #n = 2.3669 + 8.4177j #aluminio no nosso, 750 nm
-    #n = 0.1568 + 3.8060j #prata no artigo
+    n = 0.033678 + 5.4208j #Silver coated mirror, 780 nm
+    #n = 0.13883 + 4.4909j #Gold coated mirror, 750 nm
+    #n = 2.3669 + 8.4177j #aluminum coated mirror, 750 nm
+    #n = 0.1568 + 3.8060j #silver original article no artigo
     delta = 0
     psi = 0.7854
     beta_curve(n, delta, psi)
